@@ -5,6 +5,20 @@ import pandas as pd
 
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
+try:
+    import settings
+    try:
+        WINE_DATA_PATH = settings.WINE_DATA_PATH
+    except (AttributeError):
+        WINE_DATA_PATH = 'wine.xlsx'
+    try:
+        TEMPLATE_PATH = settings.TEMPLATE_PATH
+    except (AttributeError):
+        TEMPLATE_PATH = 'template.html'
+except (ImportError):
+    WINE_DATA_PATH = 'wine.xlsx'
+    TEMPLATE_PATH = 'template.html'
+
 
 def pluralize_years(years):
     if 11 <= years % 100 <= 14:
@@ -25,11 +39,11 @@ def main():
         autoescape=select_autoescape(['html', 'xml'])
     )
     
-    template = env.get_template('template.html')
+    template = env.get_template(TEMPLATE_PATH)
   
     winery_age = datetime.now().year - 1920
     
-    wine_data = pd.read_excel('wine.xlsx', 
+    wine_data = pd.read_excel(WINE_DATA_PATH, 
                               sheet_name='Лист1', 
                               na_values='', 
                               keep_default_na=False,
