@@ -28,7 +28,7 @@ def pluralize_years(years):
 
 winery_age = datetime.now().year - 1920
 
-wine_data = pd.read_excel('wine2.xlsx', 
+wine_data = pd.read_excel('wine.xlsx', 
                           sheet_name='Лист1', 
                           na_values='', 
                           keep_default_na=False,
