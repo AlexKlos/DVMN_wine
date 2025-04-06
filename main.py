@@ -1,9 +1,9 @@
 from collections import defaultdict
 from datetime import datetime
 from http.server import HTTPServer, SimpleHTTPRequestHandler
-import pandas as pd
 
 from jinja2 import Environment, FileSystemLoader, select_autoescape
+import pandas as pd
 
 try:
     import settings
