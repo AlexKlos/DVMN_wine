@@ -35,16 +35,16 @@ def main():
                               keep_default_na=False,
                               dtype=str).fillna('').to_dict(orient='records')
     
-    wine_dict = defaultdict(list)
+    wine_category = defaultdict(list) # Словарь с винами сортированными по категориям
     
     for wine in wine_data:
         category = wine.get('Категория', 'Без категории')
-        wine_dict[category].append(wine)
+        wine_category[category].append(wine)
     
     rendered_page = template.render(
         winery_age = winery_age,
         years = pluralize_years(winery_age),
-        wine_data = wine_dict,
+        wine_data = wine_category,
     )
     
     with open('index.html', 'w', encoding="utf8") as file:
